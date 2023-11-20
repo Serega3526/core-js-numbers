@@ -126,7 +126,7 @@ function getAngleBetweenVectors(/* x1, y1, x2, y2 */) {
  *     0     => 0
  */
 function getLastDigit(value) {
-  return value - Math.trunc(value / 10) * 10;
+  return value % 10;
 }
 
 /**
@@ -229,8 +229,11 @@ function isPrime(n) {
  *   toNumber(42, 0) => 42
  *   toNumber(new Number(42), 0) => 42
  */
-function toNumber(/* value, def */) {
-  throw new Error('Not implemented');
+function toNumber(value, def) {
+  if (parseInt(value, 10)) {
+    return value;
+  }
+  return def;
 }
 
 /**
@@ -622,7 +625,7 @@ function getHypotenuse(a, b) {
  */
 function getCountOfOddNumbers(number) {
   let count = 0;
-  for (let i = 0; i <= number; i += 1) {
+  for (let i = 0; i <= Math.abs(number); i += 1) {
     if (i % 2 !== 0) {
       count += 1;
     }
